@@ -36,31 +36,41 @@ const ExpenseList = ({ expenses, onEditExpense, handleFilterChange, filters }) =
               </tr>
             </thead>
             <tbody>
-              {paginatedExpenses.map(expense => (
-                <tr key={expense.id}>
-                  <td>{expense.amount}</td>
-                  <td>{expense.description}</td>
-                  <td>{new Date(expense.date).toLocaleDateString()}</td>
-                  <td>{expense.category}</td>
-                  <td>{expense.paymentMethod}</td>
-                  <td>
-                    <Button variant="warning" onClick={() => handleEdit(expense.id)}>Edit</Button>
+              {paginatedExpenses.length > 0 ? (
+                paginatedExpenses.map(expense => (
+                  <tr key={expense.id}>
+                    <td>{expense.amount}</td>
+                    <td>{expense.description}</td>
+                    <td>{new Date(expense.date).toLocaleDateString()}</td>
+                    <td>{expense.category}</td>
+                    <td>{expense.paymentMethod}</td>
+                    <td>
+                      <Button variant="warning" onClick={() => handleEdit(expense.id)}>Edit</Button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="text-center display-6 fw-bold">
+                    Data not found
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </Table>
         </Col>
       </Row>
-      <Row>
-        <Col className='d-flex justify-content-center'>
-          <Pagination>
-            <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
-            <Pagination.Item>{currentPage}</Pagination.Item>
-            <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)} disabled={paginatedExpenses.length < itemsPerPage} />
-          </Pagination>
-        </Col>
-      </Row>
+      {paginatedExpenses.length > 0 && (
+        <Row>
+          <Col className='d-flex justify-content-center'>
+            <Pagination>
+              <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+              <Pagination.Item>{currentPage}</Pagination.Item>
+              <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)} disabled={paginatedExpenses.length < itemsPerPage} />
+            </Pagination>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };
