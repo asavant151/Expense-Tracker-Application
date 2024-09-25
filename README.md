@@ -32,12 +32,12 @@ To run this project locally, follow these steps:
 
 2. **Install dependencies:**
 
-```bash
-npm install
-```
+    ```bash
+    npm install
+    ```
 
 3. **Start the React application** :
 
-```bash
-npm run dev
-```
+    ```bash
+    npm run dev
+    ```
